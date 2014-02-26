@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\title{README}
+
+
+\begin{document}
+\section{How to compile my files?}
+\begin{enumerate}
+\item Put all the code files and sample data files in the same folder.
+\item cd to the directory of the code files in the command line
+\item Run makefile: Type make in the command line.
+
+\end{enumerate}
+
+
+\section{How to run my Program?}
+After you compile those files and cd to the files directory, follow the instructions to run the program: 
+\begin{enumerate}
+\item Load data from a file: ./load [FILENAME].  The file must have the following format:
+
+\begin{verbatim}
+Name//Comment: The first student
+SID
+Address
+TelNum
+Name//Comment: The second student
+SID
+Address
+TelNum
+Name//Comment: The third student
+...
+\end{verbatim}
+
+\item Print information of all students using command: ./print
+
+\item Query information of some student using command: ./query [SID]
+
+\item Change information of some student using command: ./change [SID]. Then the terminal will prompt to type in the password(Here is "000" for all students). Next after verifying password, the terminal will give five choices:
+\begin{verbatim}
+1. Name
+2. SID
+3. Address
+4. TelNum
+5. All
+\end{verbatim}
+For choices 1-4, type in one line. For choice 5, each information should be put in seperate line.
+
+\item Clean all shared memory and stored the information in the shared memory in "output.txt" using command ./clean.
+
+\item Query Print can be executed concurrently. If change is running, then print and query must wait for change and change must wait for print and query. all of them must wait for load and clean. After clean is executed, only load can be executed normally.
+
+\item After test is completed, using ipcrm -m [shmid] delete all the shared memory segments. 
+\end{enumerate}
+
+
+\section*{Note:}
+I introduce one more variable called \emph{numofsr} stored in shared memory to record the number of students. So more information can be processed.
+
+
+
+\end{document}
